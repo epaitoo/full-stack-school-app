@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import axios from 'axios';
+
 export default class UpdateCourse extends Component {
 
   state = {
@@ -10,9 +12,9 @@ export default class UpdateCourse extends Component {
     // errors: []
   }
 
-  handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
+  handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
 
     this.setState(() => {
       return {
@@ -21,7 +23,7 @@ export default class UpdateCourse extends Component {
     })
   }
 
-  submitUpdate = () => {
+  submitUpdate = (e) => {
     const {title, description, estimatedTime, materialsNeeded} = this.state;
     e.preventDefault();
 
@@ -40,6 +42,10 @@ export default class UpdateCourse extends Component {
       .catch((err) => {
         console.log(err)
       })
+  }
+
+  cancel = () => {
+    this.props.history.push('/');
   }
 
   render() {
@@ -107,7 +113,7 @@ export default class UpdateCourse extends Component {
           </div>
           <div class="grid-100 pad-bottom">
             <button class="button" type="submit">Update Course</button>
-            <button class="button button-secondary" onclick="">Cancel</button>
+            <button class="button button-secondary" onClick={this.cancel}>Cancel</button>
           </div>
         </form>
       </div>

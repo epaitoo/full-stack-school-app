@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import Form from './Form';
 
@@ -13,18 +14,6 @@ export default class UserSignIn extends Component {
   render() {
 
     const { emailAddress, password } = this.state
-
-    change = (e) => {
-      
-    }
-  
-    submit = () => {
-  
-    }
-  
-    cancel = () => {
-      
-    }
 
     return(
       <div class="bounds">
@@ -55,10 +44,22 @@ export default class UserSignIn extends Component {
               )}/>
           </div>
           <p>&nbsp;</p>
-          <p>Don't have a user account? <a href="sign-up.html">Click here</a> to sign up!</p>
+          <p>Don't have a user account? <Link to="/signup">Click here</Link> to sign up!</p>
         </div>
       </div>
     ); 
+  }
+
+   // change = (e) => {
+      
+    // }
+  
+    // submit = () => {
+  
+    // }
+
+  cancel = () => {
+      this.props.history.push('/');
   }
 
 

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 
 import axios from 'axios';
 
@@ -9,15 +10,18 @@ export default class CourseDetail extends Component {
   }
 
   componentDidMount() {
-    const id = this.props.match.params.id
-    axios.get(`/api/courses/${id}`)
-      .then((response) => {
-        this.setState({ course: response.data })
+    const { match: { params } } = this.props;
+  
+    axios.get(`/api/courses/${params.id}`)
+      .then(({ data: course }) => {
+        this.setState({ course });
       })
       .catch((err) => {
         console.log(err)
       })
+
   }
+
 
    deleteCourse = () => {
     const id = this.props.match.params.id
@@ -31,6 +35,8 @@ export default class CourseDetail extends Component {
 
   render() {
 
+  
+
     const { course } = this.state;
 
 
@@ -38,34 +44,34 @@ export default class CourseDetail extends Component {
       <div>
         <div className="actions--bar">
           <div className="bounds">
-            <div className="grid-100"><span><a className="button" href="update-course.html">Update Course</a>
-              <a className="button" href="#" onClick={this.deleteCourse}>Delete Course</a></span><a
-                className="button button-secondary" href="index.html">Return to List</a>
+            <div className="grid-100"><span><Link className="button" to="/courses/:id/update">Update Course</Link>
+              <button className="button" onClick={this.deleteCourse}>Delete Course</button></span>
+              <Link className="button button-secondary" to="/">Return to List</Link>
               </div>
           </div>
         </div>
-        <div class="bounds course--detail">
-          <div class="grid-66">
-            <div class="course--header">
-              <h4 class="course--label">Course</h4>
-              <h3 class="course--title">{course.title}</h3>
+        <div className="bounds course--detail">
+          <div className="grid-66">
+            <div className="course--header">
+              <h4 className="course--label">Course</h4>
+              <h3 className="course--title">{course.title}</h3>
               <p>By Joe Smith</p>
             </div>
-            <div class="course--description">
+            <div className="course--description">
               <p>{course.description}</p>
             </div>
           </div>
-          <div class="grid-25 grid-right">
-            <div class="course--stats">
-              <ul class="course--stats--list">
-                <li class="course--stats--list--item">
+          <div className="grid-25 grid-right">
+            <div className="course--stats">
+              <ul className="course--stats--list">
+                <li className="course--stats--list--item">
                   <h4>Estimated Time</h4>
                   <h3>{course.estimatedTime}</h3>
                 </li>
-                <li class="course--stats--list--item">
+                <li className="course--stats--list--item">
                   <h4>Materials Needed</h4>
                   <ul>
-                    <li>{course.materialNeeded}</li>
+                    <li>{course.materialsNeeded}</li>
                   </ul>
                 </li>
               </ul>
