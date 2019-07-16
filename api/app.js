@@ -57,11 +57,13 @@ app.use((err, req, res, next) => {
   if (enableGlobalErrorLogging) {
     console.error(`Global error handler: ${JSON.stringify(err.stack)}`);
   }
-
+else {
   res.status(err.status || 500).json({
-    message: err.message,
+    message: err.message
     // error: {},
   });
+  console.log(err.message);
+  }
 });
 
 // set our port

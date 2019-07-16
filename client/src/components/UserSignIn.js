@@ -16,8 +16,8 @@ export default class UserSignIn extends Component {
     const { emailAddress, password } = this.state
 
     return(
-      <div class="bounds">
-        <div class="grid-33 centered signin">
+      <div className="bounds">
+        <div className="grid-33 centered signin">
           <h1>Sign In</h1>
           <div>
             <Form 

@@ -12,7 +12,9 @@ import UserSignUp from './components/UserSignUp';
 import UserSignIn from './components/UserSignIn';
 import UserSignOut from './components/UserSignOut';
 import NotFound from './components/NotFound';
+import withContext from './Context';
 
+const UserSignUpWithContext = withContext(UserSignUp);
 
 export default ()  => (
   
@@ -26,7 +28,7 @@ export default ()  => (
         <Route path="/courses/:id" component={CourseDetail}/>
         <Route path="/courses/:id/update" component={UpdateCourse}/>
         <Route path="/signin" component={UserSignIn}/>
-        <Route path="/signup" component={UserSignUp}/>
+        <Route path="/signup" component={UserSignUpWithContext}/>
         <Route path="/signout" component={UserSignOut}/>
         <Route component={NotFound}/>
       </Switch>

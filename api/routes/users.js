@@ -37,7 +37,8 @@ router.post('/', (req, res, next) => {
     
   }).catch((err) => {
     if (err.name === "SequelizeValidationError" || "SequelizeUniqueConstraintError") {
-      res.status(400).json({error: err.message})
+      const errorMessage = err.errors.map(error => error.message);
+      res.status(400).json({errors: errorMessage })
     } else {
       throw err;
     }
