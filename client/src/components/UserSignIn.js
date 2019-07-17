@@ -7,13 +7,13 @@ export default class UserSignIn extends Component {
 
   state = {
     emailAddress: '',
-    password: ''
-     //errors: []
+    password: '',
+    errors: []
   }
 
   render() {
 
-    const { emailAddress, password } = this.state
+    const { emailAddress, password, errors } = this.state;
 
     return(
       <div className="bounds">
@@ -23,6 +23,7 @@ export default class UserSignIn extends Component {
             <Form 
               submit={this.submit}
               cancel={this.cancel}
+              errors={errors}
               submitButtonText="Sign In"
               elements={() => (
                 <React.Fragment>
@@ -50,16 +51,40 @@ export default class UserSignIn extends Component {
     ); 
   }
 
-   // change = (e) => {
-      
-    // }
-  
-    // submit = () => {
-  
-    // }
+  change = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+
+    this.setState(() => {
+      return {
+        [name]: value
+      };
+    });
+  }
+
+  submit = () => {
+    const { emailAddress, password } = this.state;
+    const { context } = this.props
+    context.actions.signIn(emailAddress, password)
+     .then(user => {
+       if (user === null ) {
+        this.setState(() => {
+          return {errors: ['Sign-in was unsuccessful']};
+        })
+       } else {
+         this.props.history.push('/');
+         console.log(`SUCCESS! ${emailAddress} is now signed in!`);
+       }
+     })
+     .catch(err => {
+        console.log(err)
+        this.props.history.push('/error');
+     })
+
+  }
 
   cancel = () => {
-      this.props.history.push('/');
+    this.props.history.push('/');
   }
 
 

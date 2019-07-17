@@ -16,7 +16,7 @@ export default ({ submit, cancel, elements, submitButtonText, errors }) => {
 
   return(
     <div>
-      <ErrorsDisplay errors={errors} />
+      <ErrorsDisplay errors={errors}/>
       <form onSubmit={handleSubmit}>
         {elements()}
         <div className="grid-100 pad-bottom">

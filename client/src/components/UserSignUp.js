@@ -98,7 +98,7 @@ export default class UserSignUp extends Component {
     const { context } = this.props;
 
     const { firstName, lastName, emailAddress, 
-      password, confirmPassword } = this.state;
+      password, confirmPassword} = this.state;
 
     const user = {
       firstName,
@@ -107,26 +107,23 @@ export default class UserSignUp extends Component {
       password
     };
 
-    
-
-    context.data.createUser(user)
+    if (password !== confirmPassword) {
+      alert("Passwords don't match");
+    } else {
+      // make API call
+      context.data.createUser(user)
       .then(errors => {
         if (errors.length) {
-          this.setState({ errors });
-          
-        } else {
+          this.setState({ errors }); 
+        }  else {
           console.log(`${emailAddress} is successfully signed up and authenticated!`);
-        }
-        if (password !== confirmPassword) {
-          this.setState({errors: 'Password confirmation does not match password'});
         }
       })
       .catch((err) => {
         console.log(err);
         this.props.history.push('/error'); 
       })
-
-
+    }
   }
 
   cancel = () => {
