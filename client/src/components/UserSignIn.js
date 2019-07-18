@@ -65,7 +65,7 @@ export default class UserSignIn extends Component {
   submit = () => {
     const { emailAddress, password } = this.state;
     const { context } = this.props
-    context.actions.signIn(emailAddress, password)
+    context.actions.signIn(emailAddress, password) 
      .then(user => {
        if (user === null ) {
         this.setState(() => {

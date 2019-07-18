@@ -14,13 +14,7 @@ const { User } = models;
 //Returns the currently authenticated user
 router.get('/', authenticateUser,  (req, res) => {
   const user = users;
-    res.json({
-      id: user.id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      emailAddress: user.emailAddress
-    })
- 
+    res.json(user)
 });
 
 // create a new user
