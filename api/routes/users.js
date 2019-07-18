@@ -15,6 +15,7 @@ const { User } = models;
 router.get('/', authenticateUser,  (req, res) => {
   const user = users;
     res.json({
+      id: user.id,
       firstName: user.firstName,
       lastName: user.lastName,
       emailAddress: user.emailAddress

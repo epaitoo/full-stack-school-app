@@ -53,7 +53,14 @@ router.post('/', authenticateUser,(req, res, next) => {
       res.location(`/api/courses/${data.id}`);
       res.status(201).end()
     }).catch((err) => {
-      err.status = 400;
+      if (err.name === "SequelizeValidationError" || "SequelizeUniqueConstraintError") {
+        const errorMessage = err.errors.map(error => error.message);
+        res.status(400).json({errors: errorMessage })
+      } else {
+        throw err;
+      }
+    })
+    .catch((err) => {
       return next(err);
   }) 
 
@@ -71,8 +78,9 @@ router.put('/:id', authenticateUser, (req, res, next) => {
   }).then(() => {
     res.status(204).end()
   }).catch((err) => {
-    if (err.name === "SequelizeValidationError") {
-      res.status(400).json({error: err.message})
+    if (err.name === "SequelizeValidationError" || "SequelizeUniqueConstraintError") {
+      const errorMessage = err.errors.map(error => error.message);
+      res.status(400).json({errors: errorMessage })
     } else {
       throw err;
     }

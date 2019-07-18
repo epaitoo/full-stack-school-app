@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import axios from 'axios';
 
+
 export default class Courses extends Component {
 
   state = {
@@ -23,6 +24,7 @@ export default class Courses extends Component {
   render() {
 
     const { courses } = this.state
+
     
     // console.log(courses)
 

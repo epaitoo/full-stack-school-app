@@ -31,23 +31,28 @@ export default class CourseDetail extends Component {
       })
   }
 
-
+  
 
   render() {
 
-  
-
     const { course } = this.state;
+    const { context } = this.props;
+    const authUser = context.authenticatedUser;
 
 
     return(
       <div>
         <div className="actions--bar">
           <div className="bounds">
-            <div className="grid-100"><span><Link className="button" to="/courses/:id/update">Update Course</Link>
-              <button className="button" onClick={this.deleteCourse}>Delete Course</button></span>
+            <div className="grid-100">
+              { authUser !== null && authUser.id === course.userId &&
+                <span>
+                  <Link className="button" to={`/courses/${course.id}/update`}>Update Course</Link>
+                  <button className="button" onClick={this.deleteCourse}>Delete Course</button>
+                </span>
+              }
               <Link className="button button-secondary" to="/">Return to List</Link>
-              </div>
+            </div>
           </div>
         </div>
         <div className="bounds course--detail">
