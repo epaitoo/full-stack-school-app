@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-
+// import axios from 'axios';
 import Form from './Form';
 
 
@@ -113,8 +113,8 @@ export default class CreateCourse extends Component {
     const password = authUser.password
     // const credentials = btoa(`${emailAddress}:${password}`)
     // const basicAuth = `Basic ${credentials}`;
-    console.log(password)
     
+    console.log(password)
 
     const course = {
       title,
@@ -124,18 +124,18 @@ export default class CreateCourse extends Component {
     }
 
     context.data.createCourse(course, emailAddress, password)
-      .then(res => {
-        console.log(res);
-      })
       .then(errors => {
         if (errors.length) {
           this.setState({ errors }); 
+        }  else {
+          console.log('Success');
         }
       })
       .catch((err) => {
         console.log(err)
-        this.props.history.push('/error'); 
-      })
+      }) 
+
+    
   }
 
   cancel= () => {

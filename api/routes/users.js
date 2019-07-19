@@ -21,9 +21,9 @@ router.get('/', authenticateUser,  (req, res) => {
 router.post('/', (req, res, next) => {
   const user = req.body
   // hash the password if provided
-  if (user.password) {
-    user.password = bcryptjs.hashSync(user.password);
-  }
+  
+  user.password = bcryptjs.hashSync(user.password);
+  
  
   User.create(user).then(() => {
     res.location('/');
