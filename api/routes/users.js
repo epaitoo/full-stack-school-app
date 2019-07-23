@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const dbModule = require('../db');
 const models = dbModule.models;
-const bcryptjs = require('bcryptjs');
+
 
 const authenticateUser = require('../authenticate');
 
@@ -22,7 +22,7 @@ router.post('/', (req, res, next) => {
   const user = req.body
   // hash the password if provided
   
-  user.password = bcryptjs.hashSync(user.password);
+  // user.password = bcryptjs.hashSync(user.password);
   
  
   User.create(user).then(() => {

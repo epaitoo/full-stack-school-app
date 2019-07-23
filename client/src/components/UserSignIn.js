@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Form from './Form';
 
+
 export default class UserSignIn extends Component {
 
   state = {
@@ -11,9 +12,12 @@ export default class UserSignIn extends Component {
     errors: []
   }
 
+  
+
   render() {
 
     const { emailAddress, password, errors } = this.state;
+    
 
     return(
       <div className="bounds">
@@ -64,6 +68,8 @@ export default class UserSignIn extends Component {
 
   submit = () => {
     const { emailAddress, password } = this.state;
+
+    
     const { context } = this.props
     context.actions.signIn(emailAddress, password) 
      .then(user => {
@@ -73,7 +79,7 @@ export default class UserSignIn extends Component {
         })
        } else {
          this.props.history.push('/');
-         console.log(`SUCCESS! ${emailAddress} is now signed in!`);
+         console.log(`SUCCESS! ${emailAddress} is now signed in!, ${password}`);
        }
      })
      .catch(err => {
@@ -81,12 +87,15 @@ export default class UserSignIn extends Component {
         this.props.history.push('/error');
      })
 
+    
+
   }
 
   cancel = () => {
     this.props.history.push('/');
   }
 
+  
 
 }
 

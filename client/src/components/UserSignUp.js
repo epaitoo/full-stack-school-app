@@ -100,6 +100,8 @@ export default class UserSignUp extends Component {
     const { firstName, lastName, emailAddress, 
       password, confirmPassword} = this.state;
 
+      console.log(password)
+
     const user = {
       firstName,
       lastName,

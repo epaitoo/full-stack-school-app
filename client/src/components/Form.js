@@ -1,11 +1,13 @@
 import React from 'react';
 
 
+
 export default ({ submit, cancel, elements, submitButtonText, errors }) => {
 
   function handleSubmit(event) {
     event.preventDefault();
     submit();
+    
   }
 
 
