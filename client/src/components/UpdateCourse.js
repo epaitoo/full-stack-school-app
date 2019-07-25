@@ -11,6 +11,8 @@ export default class UpdateCourse extends Component {
     description: '',
     estimatedTime: '',
     materialsNeeded: '',
+    course: [],
+    courseUser : [],
     errors: [],
   }
 
@@ -22,7 +24,9 @@ export default class UpdateCourse extends Component {
         this.setState({ title: course.title, 
                       description:course.description,
                       estimatedTime: course.estimatedTime,
-                      materialsNeeded: course.materialsNeeded
+                      materialsNeeded: course.materialsNeeded,
+                      course,
+                      courseUser : course.User
                      });
       })
       .catch((err) => {
@@ -35,7 +39,7 @@ export default class UpdateCourse extends Component {
  
   render() {
     
-    const { title, description, estimatedTime, materialsNeeded, errors } = this.state
+    const { title, description, estimatedTime, materialsNeeded, courseUser, errors } = this.state
 
 
     return(
@@ -61,7 +65,7 @@ export default class UpdateCourse extends Component {
                       onChange={this.change}
                       value={title} />
                   </div>
-                  <p>By Joe Smith</p>
+                  <p>By {courseUser.firstName} {courseUser.lastName}</p>
                 </div>
                 <div className="course--description">
                   <div>
@@ -125,9 +129,14 @@ export default class UpdateCourse extends Component {
 
 
   submit = () => {
-    const {title, description, estimatedTime, materialsNeeded} = this.state;
+    const {title, description, estimatedTime, materialsNeeded, course} = this.state;
+    const { context } = this.props;
 
-    const course = {
+    const authUser = context.authenticatedUser;
+    const emailAddress = authUser.emailAddress;
+    const password = authUser.password
+
+    const courseData = {
       title,
       description,
       estimatedTime,
@@ -135,18 +144,21 @@ export default class UpdateCourse extends Component {
     }
 
     const { match: { params } } = this.props;
-    axios.put(`/api/courses/${params.id}`, {course})
-      .then(errors => {
-        if (errors.length) {
-          this.setState({ errors }); 
-        } else {
-          console.log("Course is successfully created");
-        }
+    axios.put(`/api/courses/${params.id}`, courseData, {
+      auth : {
+        username: emailAddress,
+        password,
+      }
+    })
+      .then(() => {
+        this.props.history.push(`/courses/${course.id}`);
+        console.log('course is succesfully updated')
       })
       .catch((err) => {
-        console.log(err)
-        this.props.history.push('/error'); 
+        const errors = err.response.data.errors;
+        this.setState({ errors })
       })
+
   }
 
   cancel = () => {

@@ -16,6 +16,8 @@ export default class CreateCourse extends Component {
 
   render() {
     const {title, description, estimatedTime, materialsNeeded, errors} = this.state;
+    const { context } = this.props;
+    const authUser = context.authenticatedUser;
 
     return(
       <div>
@@ -39,7 +41,7 @@ export default class CreateCourse extends Component {
                           onChange={this.change}
                           value={title}/>
                       </div>
-                      <p>By Joe Smith</p>
+                      <p>By {authUser.firstName} {authUser.lastName}</p>
                     </div>
                     <div className="course--description">
                       <div>
@@ -109,31 +111,29 @@ export default class CreateCourse extends Component {
 
     const authUser = context.authenticatedUser;
     const emailAddress = authUser.emailAddress;
-    const password = 'joepassword'
+    const password = authUser.password
   
-    console.log(password)
     
     const course = {
       title,
       description,
       estimatedTime,
-      materialsNeeded
+      materialsNeeded,
+      userId : authUser.id
     }
 
-    context.data.createCourse(course, emailAddress, password)
+    context.data.createCourse(course, emailAddress, password)  
       .then(errors => {
         if (errors.length) {
           this.setState({ errors }); 
         }  else {
+          this.props.history.push(`/`);
           console.log(`Course is succesfully created`);
         }
       })
       .catch((err) => {
         console.log(err)
       }) 
-
-    
-
   }
 
   cancel= () => {

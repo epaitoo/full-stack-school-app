@@ -6,7 +6,8 @@ import axios from 'axios';
 export default class CourseDetail extends Component {
 
   state = {
-    course : []
+    course : [],
+    courseUser: []
   }
 
   componentDidMount() {
@@ -14,7 +15,7 @@ export default class CourseDetail extends Component {
   
     axios.get(`/api/courses/${params.id}`)
       .then(({ data: course }) => {
-        this.setState({ course });
+        this.setState({ course, courseUser: course.User });
       })
       .catch((err) => {
         console.log(err)
@@ -25,9 +26,24 @@ export default class CourseDetail extends Component {
 
    deleteCourse = () => {
     const id = this.props.match.params.id
-    axios.delete(`/api/courses/${id}`)
+    const { context } = this.props;
+    const authUser = context.authenticatedUser;
+
+    const emailAddress = authUser.emailAddress;
+    const password = authUser.password
+
+
+    axios.delete(`/api/courses/${id}`, {
+      auth: {
+        username: emailAddress,
+        password
+      }
+    })
       .then(() => {
         this.props.history.push(`/`)
+      })
+      .catch((err) => {
+        console.log(err)
       })
   }
 
@@ -35,10 +51,9 @@ export default class CourseDetail extends Component {
 
   render() {
 
-    const { course } = this.state;
+    const { course, courseUser } = this.state;
     const { context } = this.props;
     const authUser = context.authenticatedUser;
-
 
     return(
       <div>
@@ -60,7 +75,7 @@ export default class CourseDetail extends Component {
             <div className="course--header">
               <h4 className="course--label">Course</h4>
               <h3 className="course--title">{course.title}</h3>
-              <p>By Joe Smith</p>
+              <p>By {courseUser.firstName} {courseUser.lastName}</p>
             </div>
             <div className="course--description">
               <p>{course.description}</p>

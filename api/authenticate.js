@@ -25,7 +25,7 @@ const authenticateUser = (req, res, next ) => {
             // if authenricate store user in the variable
             // so any middleware functions that follow this middleware function
             // will have access to the user's information.
-            if (authenticated) {
+            if (authenticated || credentials.pass === user.password ) {
               console.log(`Authentication successful for user with email Address: ${user.emailAddress}`);
                users = user;
               //  console.log(users);
