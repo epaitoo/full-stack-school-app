@@ -41,7 +41,6 @@ export default class UpdateCourse extends Component {
     
     const { title, description, estimatedTime, materialsNeeded, courseUser, errors } = this.state
 
-
     return(
       <div className="bounds course--detail">
       <h1>Update Course</h1>
@@ -152,7 +151,6 @@ export default class UpdateCourse extends Component {
     })
       .then(() => {
         this.props.history.push(`/courses/${course.id}`);
-        console.log('course is succesfully updated')
       })
       .catch((err) => {
         const errors = err.response.data.errors;

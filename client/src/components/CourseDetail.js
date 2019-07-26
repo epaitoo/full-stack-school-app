@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 
 import axios from 'axios';
 
@@ -54,6 +55,7 @@ export default class CourseDetail extends Component {
     const { course, courseUser } = this.state;
     const { context } = this.props;
     const authUser = context.authenticatedUser;
+    
 
     return(
       <div>
@@ -77,9 +79,7 @@ export default class CourseDetail extends Component {
               <h3 className="course--title">{course.title}</h3>
               <p>By {courseUser.firstName} {courseUser.lastName}</p>
             </div>
-            <div className="course--description">
-              <p>{course.description}</p>
-            </div>
+            <ReactMarkdown className="course--description" source={course.description} />
           </div>
           <div className="grid-25 grid-right">
             <div className="course--stats">
@@ -90,9 +90,7 @@ export default class CourseDetail extends Component {
                 </li>
                 <li className="course--stats--list--item">
                   <h4>Materials Needed</h4>
-                  <ul>
-                    <li>{course.materialsNeeded}</li>
-                  </ul>
+                  <ReactMarkdown source={course.materialsNeeded} />
                 </li>
               </ul>
             </div>

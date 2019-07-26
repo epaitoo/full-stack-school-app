@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const dbModule = require('../db');
+const bcryptjs = require('bcryptjs');
 const models = dbModule.models;
 
 

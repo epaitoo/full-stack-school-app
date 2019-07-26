@@ -128,7 +128,6 @@ export default class CreateCourse extends Component {
           this.setState({ errors }); 
         }  else {
           this.props.history.push(`/`);
-          console.log(`Course is succesfully created`);
         }
       })
       .catch((err) => {
