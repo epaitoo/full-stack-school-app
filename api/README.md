@@ -9,7 +9,7 @@ This project uses knowledge of REST API design, Node.js, and Express to create A
 
 ## Overview of the Provided Project Files
 
-We've supplied the following files for you to use: 
+ 
 
 * The `seed` folder contains a starting set of data for your database in the form of a JSON file (`data.json`) and a collection of files (`context.js`, `database.js`, and `index.js`) that can be used to create your app's database and populate it with data (we'll explain how to do that below).
 * We've included a `.gitignore` file to ensure that the `node_modules` folder doesn't get pushed to your GitHub repo.
