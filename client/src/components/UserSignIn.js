@@ -9,14 +9,23 @@ export default class UserSignIn extends Component {
   state = {
     emailAddress: '',
     password: '',
-    errors: []
+    type: 'password',
+    errors: [],
+  }
+
+  showHide = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    this.setState({
+      type: this.state.type === 'password' ? 'input' : 'password'
+    })  
   }
 
   
 
   render() {
 
-    const { emailAddress, password, errors } = this.state;
+    const { emailAddress, password, type, errors } = this.state;
     
 
     return(
@@ -41,10 +50,13 @@ export default class UserSignIn extends Component {
                   <input 
                     id="password" 
                     name="password" 
-                    type="password" 
+                    type={type} 
                     onChange={this.change}
                     placeholder="Password" 
                     value={password} />
+                    <span className="show" 
+                      onClick={this.showHide}>{this.state.type === 'password' ? 'Show' : 'Hide'}
+                    </span>
                 </React.Fragment>
               )}/>
           </div>

@@ -751,3 +751,17 @@ input:focus {
 .course--description textarea {
   margin-bottom: 20px;
 }
+
+/* password show and hide button */
+.show {
+  cursor: pointer;
+  position: absolute;
+  margin-top: 12px;
+  margin-left: -55px;
+  background: #7c689b;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 0.8em;
+}

@@ -11,12 +11,21 @@ export default class UserSignUp extends Component {
     emailAddress: '',
     password: '',
     confirmPassword: '',
+    type: 'password',
     errors: []
+  }
+
+  showHide = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    this.setState({
+      type: this.state.type === 'password' ? 'input' : 'password'
+    })  
   }
 
   render() {
     const { firstName, lastName, emailAddress, 
-          password, confirmPassword, errors } = this.state
+          password, confirmPassword,  type, errors } = this.state
 
     return (
       <div>
@@ -57,19 +66,25 @@ export default class UserSignUp extends Component {
                     <input 
                       id="password" 
                       name="password" 
-                      type="password" 
+                      type={type} 
                       className="" 
                       onChange={this.change}
                       placeholder="Password" 
                       value={password}/>
+                      <span className="show" 
+                        onClick={this.showHide}>{this.state.type === 'password' ? 'Show' : 'Hide'}
+                    </span>
                     <input 
                       id="confirmPassword" 
                       name="confirmPassword" 
-                      type="password" 
+                      type={type} 
                       className=""
                       onChange={this.change}
                       placeholder="Confirm Password"
                       value={confirmPassword}/>
+                      <span className="show" 
+                        onClick={this.showHide}>{this.state.type === 'password' ? 'Show' : 'Hide'}
+                    </span>
                   </React.Fragment>
                   
                 )}/>  
