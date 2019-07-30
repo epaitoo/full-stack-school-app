@@ -4,7 +4,7 @@ This app uses React to create a client for an [existing school database REST API
 This is a full stack application that provides a way for users to administer a school database containing information about courses: users can interact with the database by retrieving a list of courses, viewing detail for a specific course, as well as creating, updating and deleting courses in the database. In addition, users are required to create an account and sign in to make changes to the database.
 
 ## How it works
-* Project is set up using create-react-app
+* This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 *	The React project's folder is named client
 *	The REST API project's folder is named api and has been updated with support for Cross-Origin Resource Sharing (CORS) using [CORS npm package](https://www.npmjs.com/package/cors)
 *	The app contains the following stateful class components:
@@ -31,6 +31,11 @@ This is a full stack application that provides a way for users to administer a s
 *	The "Course Detail" screen renders the course description and materialsNeeded properties as markdown formatted text
 * The app persists user credentials using an HTTP cookie or local storage so that the user's authenticated state is maintained even if the application is reloaded or loaded into a new browser tab
 
+## Seed Data
+
+The seed folder in /api folder contains a starting set of data for your database in the form of a JSON file (data.json) and a collection of files (context.js, database.js, and index.js) that can be used to create your app's database and populate it with data (we'll explain how to do that below).
+
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development.
@@ -39,7 +44,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 * Move to the /api folder and run `npm install` to install the dependacies
 
-* Open a new terminal and move to the /client folder and `npm install` to install the dependacies
+* Open a new terminal and move to the /client folder and  `npm install` to install the dependacies
 
 * In the /api folder run `npm run seed` and run `npm start` to start the server on http://localhost:5000
 
