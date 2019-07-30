@@ -13,6 +13,8 @@ export default class UserSignIn extends Component {
     errors: [],
   }
 
+  // shows / hide password input onClick
+  // by setting the type of input from 'input' or 'password'
   showHide = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -67,6 +69,7 @@ export default class UserSignIn extends Component {
     ); 
   }
 
+  // sets the state to the input value on change
   change = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -78,12 +81,15 @@ export default class UserSignIn extends Component {
     });
   }
 
+  //Sign In an authenticated User on submit
   submit = () => {
     const { emailAddress, password } = this.state;
 
     const { context } = this.props
     const { from } = this.props.location.state || { from: { pathname: '/' } };
 
+    // imports the signIn() method defined in Data.js
+    // accessed via the destructured context variable to sign in a user
     context.actions.signIn(emailAddress, password) 
      .then(user => {
        if (user === null ) {
@@ -101,6 +107,7 @@ export default class UserSignIn extends Component {
      })
   }
 
+  // cancels and return the user to the homepage
   cancel = () => {
     this.props.history.push('/');
   }

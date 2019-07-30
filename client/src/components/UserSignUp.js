@@ -15,6 +15,8 @@ export default class UserSignUp extends Component {
     errors: []
   }
 
+   // shows / hide password input onClick
+  // by setting the type of input from 'input' or 'password'
   showHide = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -97,6 +99,7 @@ export default class UserSignUp extends Component {
     );
   }
 
+  // sets the state to the input value on change
   change = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -108,6 +111,7 @@ export default class UserSignUp extends Component {
     });
   }
 
+  //Sign up a new User on submit
   submit = () => {
     
     const { context } = this.props;
@@ -128,6 +132,8 @@ export default class UserSignUp extends Component {
       alert("Passwords don't match");
     } else {
       // make API call
+      // imports the createUser() method defined in Data.js
+      // accessed via the destructured context variable to sign up a user
       context.data.createUser(user)
       .then(errors => {
         if (errors.length) {
@@ -146,6 +152,7 @@ export default class UserSignUp extends Component {
     }
   }
 
+  // cancels and return the user to the homepage
   cancel = () => {
     this.props.history.push('/');
   }

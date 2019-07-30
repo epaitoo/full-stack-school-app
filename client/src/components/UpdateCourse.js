@@ -16,6 +16,7 @@ export default class UpdateCourse extends Component {
     errors: [],
   }
 
+  // Get the course clicked on CourseDetail.js when the component mounts
   componentDidMount() {
     const { match: { params } } = this.props;
   
@@ -114,7 +115,7 @@ export default class UpdateCourse extends Component {
     );
   }
 
-
+  // sets the state to the input value on change
   change = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -126,7 +127,7 @@ export default class UpdateCourse extends Component {
     })
   }
 
-
+  // Updates a course on submit
   submit = () => {
     const {title, description, estimatedTime, materialsNeeded, course} = this.state;
     const { context } = this.props;
@@ -142,6 +143,8 @@ export default class UpdateCourse extends Component {
       materialsNeeded
     }
 
+    // Axios PUT Request: url, courseData as the payload
+    // an option: auth, which is the basic authentication
     const { match: { params } } = this.props;
     axios.put(`/api/courses/${params.id}`, courseData, {
       auth : {
@@ -159,6 +162,7 @@ export default class UpdateCourse extends Component {
 
   }
 
+  // cancels and return the user to the homepage
   cancel = () => {
     this.props.history.push('/');
   }

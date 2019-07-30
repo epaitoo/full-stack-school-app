@@ -94,6 +94,7 @@ export default class CreateCourse extends Component {
     );
   }
 
+  // sets the state to the input value on change
   change = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -105,6 +106,7 @@ export default class CreateCourse extends Component {
     })
   }
 
+  // Creates a new course on submit
   submit = () => {
     const {title, description, estimatedTime, materialsNeeded} = this.state;
     const { context } = this.props;
@@ -122,6 +124,8 @@ export default class CreateCourse extends Component {
       userId : authUser.id
     }
 
+    // imports the createUser() method defined in Data.js
+    // accessed via the destructured context variable to create a course
     context.data.createCourse(course, emailAddress, password)  
       .then(errors => {
         if (errors.length) {
@@ -135,6 +139,7 @@ export default class CreateCourse extends Component {
       }) 
   }
 
+  // cancels and return the user to the homepage
   cancel= () => {
     this.props.history.push('/');
   }

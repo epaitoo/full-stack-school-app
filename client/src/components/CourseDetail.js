@@ -11,6 +11,7 @@ export default class CourseDetail extends Component {
     courseUser: []
   }
 
+  // Get all the courses on Component Mount
   componentDidMount() {
     const { match: { params } } = this.props;
   
@@ -24,7 +25,8 @@ export default class CourseDetail extends Component {
 
   }
 
-
+  // Function which only an authenticated User can delete 
+  // his/her course
    deleteCourse = () => {
     const id = this.props.match.params.id
     const { context } = this.props;
@@ -33,7 +35,7 @@ export default class CourseDetail extends Component {
     const emailAddress = authUser.emailAddress;
     const password = authUser.password
 
-
+    // Axios Delete Request: url, an option:  auth, which is the basic authentication
     axios.delete(`/api/courses/${id}`, {
       auth: {
         username: emailAddress,
